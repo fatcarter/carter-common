@@ -1,0 +1,1 @@
+mvn clean deploy -DskipTests=true -Dmaven.test.skip=true
