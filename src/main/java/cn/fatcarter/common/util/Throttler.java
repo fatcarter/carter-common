@@ -1,5 +1,8 @@
 package cn.fatcarter.common.util;
 
+import cn.fatcarter.common.locks.DefaultLockRegistry;
+import cn.fatcarter.common.locks.LockRegistry;
+import cn.fatcarter.common.locks.WhileLockedProcessor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +28,8 @@ public abstract class Throttler {
     private static Thread runnerThread;
     private static final AtomicBoolean startup = new AtomicBoolean(false);
     private static ExecutorService executorService = new ThreadPoolExecutor(10, 10, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
+    private static LockRegistry lockRegistry = new DefaultLockRegistry();
+
 
     static {
         consumer.setBlockingOnNone(true);
@@ -38,11 +43,24 @@ public abstract class Throttler {
         start();
         Throttle throttle = MAP.get(key);
         if (throttle == null) {
-            throttle = new Throttle(getRunner(key, runnable), timeout);
-            MAP.put(key, throttle);
-            queue.add(throttle);
+            WhileLockedProcessor processor = new WhileLockedProcessor(lockRegistry, key) {
+                @Override
+                protected void whileLocked() throws Exception {
+                    if (MAP.get(key) == null) {
+                        Throttle t = new Throttle(getRunner(key, runnable), timeout);
+                        MAP.put(key, t);
+                        queue.add(t);
+                    }
+                }
+            };
+            try {
+                processor.doWhileLocked();
+            } catch (Exception e) {
+                throw new RuntimeException("创建节流(throttle)对象失败! e=" + e, e);
+            }
         }
     }
+
 
     private static Runnable getRunner(String key, Runnable runnable) {
         return () -> {
