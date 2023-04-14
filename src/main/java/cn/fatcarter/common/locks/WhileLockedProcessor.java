@@ -9,10 +9,25 @@ public abstract class WhileLockedProcessor {
 
     private final LockRegistry lockRegistry;
 
-    public WhileLockedProcessor(LockRegistry lockRegistry,  Object key) {
+    public static void runWithLocked(LockRegistry registry, Object key, Runnable runnable) {
+        WhileLockedProcessor processor = new WhileLockedProcessor(registry, key) {
+            @Override
+            protected void whileLocked() throws Exception {
+                runnable.run();
+            }
+        };
+        try {
+            processor.doWhileLocked();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public WhileLockedProcessor(LockRegistry lockRegistry, Object key) {
         this.key = key;
         this.lockRegistry = lockRegistry;
     }
+
 
     public final void doWhileLocked() throws Exception {
         Lock lock = this.lockRegistry.obtain(this.key);

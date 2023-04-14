@@ -23,13 +23,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @Slf4j
 public abstract class Throttler {
     private static final ConcurrentMap<String, Throttle> MAP = new ConcurrentHashMap<>();
-    private static DelayQueue<Throttle> queue = new DelayQueue<>();
-    private static PollQueueConsumer<Throttle> consumer = new PollQueueConsumer<>(queue, Throttler::runThrottle);
-    private static Thread runnerThread;
+    private static final DelayQueue<Throttle> queue = new DelayQueue<>();
+    private static final PollQueueConsumer<Throttle> consumer = new PollQueueConsumer<>(queue, Throttler::runThrottle);
     private static final AtomicBoolean startup = new AtomicBoolean(false);
-    private static ExecutorService executorService = new ThreadPoolExecutor(10, 10, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
-    private static LockRegistry lockRegistry = new DefaultLockRegistry();
+    private static final LockRegistry lockRegistry = new DefaultLockRegistry();
 
+    private static Thread runnerThread;
+    private static ExecutorService executorService = new ThreadPoolExecutor(10, 10, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
 
     static {
         consumer.setBlockingOnNone(true);
