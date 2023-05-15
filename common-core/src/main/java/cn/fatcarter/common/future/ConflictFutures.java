@@ -100,7 +100,7 @@ public class ConflictFutures {
             return;
         }
         logger.debug("Will clean future with write locked! ");
-        RWWhileLockedProcessor.runWithWhiteLocked(rw, lock, () -> {
+        RWWhileLockedProcessor.runWithWriteLocked(rw, lock, () -> {
             logger.debug("Locked!! Clean futures");
             ArrayList<String> keys = new ArrayList<>();
             for (KeyFuture value : map.values()) {
