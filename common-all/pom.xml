@@ -10,7 +10,7 @@
         <relativePath>../common-parent</relativePath>
     </parent>
     <artifactId>common-all</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
