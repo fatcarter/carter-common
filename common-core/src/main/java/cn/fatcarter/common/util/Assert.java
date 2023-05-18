@@ -20,4 +20,34 @@ public abstract class Assert {
             throw new IllegalArgumentException(errorMsg);
         }
     }
+
+    public static void greaterThenZero(Integer i, String errorMsg) {
+        if (i == null || i <= 0) {
+            throw new IllegalArgumentException(errorMsg);
+        }
+    }
+
+    public static void greaterThenZero(Double i, String errorMsg) {
+        if (i == null || i <= 0) {
+            throw new IllegalArgumentException(errorMsg);
+        }
+    }
+
+    public static void greaterThenZero(Float i, String errorMsg) {
+        if (i == null || i <= 0) {
+            throw new IllegalArgumentException(errorMsg);
+        }
+    }
+
+    public static void greaterThenZero(Short i, String errorMsg) {
+        if (i == null || i <= 0) {
+            throw new IllegalArgumentException(errorMsg);
+        }
+    }
+
+    public static void greaterThenZero(Byte i, String errorMsg) {
+        if (i == null || i <= 0) {
+            throw new IllegalArgumentException(errorMsg);
+        }
+    }
 }

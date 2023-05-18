@@ -1,4 +1,4 @@
-package cn.fatcarter.common.net;
+package cn.fatcarter.common.net.netty;
 
 import io.netty.channel.epoll.Epoll;
 
@@ -13,4 +13,5 @@ public class NettyUtils {
         }
         return Boolean.parseBoolean(System.getProperty("netty.epoll.enable", "true"));
     }
+
 }

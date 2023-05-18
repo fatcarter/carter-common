@@ -1,9 +1,32 @@
 package cn.fatcarter.common.net;
 
+import cn.fatcarter.common.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ByteUtils {
+
+    public static String toBinary(byte[] bytes) {
+        StringBuilder builder = new StringBuilder();
+        for (byte b : bytes) {
+            builder.append(toBinary(b));
+        }
+        return builder.toString();
+    }
+
+    public static String toBinary(byte bytes) {
+        String binary = Integer.toBinaryString(bytes & 0xff);
+        if (binary.length() < 8) {
+            int size = 8 - binary.length();
+            for (int i = 0; i < size; i++) {
+                binary = StringUtils.padStartZero(binary, 1);
+            }
+            return binary;
+        }
+        return binary;
+    }
+
 
     public static List<Byte> asList(byte[] bytes) {
         List<Byte> list = new ArrayList<>(bytes.length);
@@ -12,6 +35,41 @@ public class ByteUtils {
         }
         return list;
     }
+
+    public static byte[] toArray(List<Byte> bytes) {
+        if (bytes.size() == 0) return new byte[0];
+
+        byte[] array = new byte[bytes.size()];
+        int offset = 0;
+        for (Byte b : bytes) {
+            array[offset] = b;
+            offset++;
+        }
+        return array;
+    }
+
+    public static String toHex(byte[] bytes, String delimiter) {
+        if (bytes.length == 1) {
+            return toHex(bytes[0]);
+        }
+        StringBuilder builder = new StringBuilder();
+        if (delimiter.length() > 0) {
+            for (byte b : bytes) {
+                builder.append(toHex(b)).append(delimiter);
+            }
+            return builder.length() > 0 ? builder.substring(0, builder.length() - delimiter.length()) : "";
+        } else {
+            for (byte b : bytes) {
+                builder.append(toHex(b));
+            }
+            return builder.toString();
+        }
+    }
+
+    public static String toHex(byte[] bytes) {
+        return toHex(bytes, "");
+    }
+
     public static String toHex(byte b) {
         String r = Integer.toHexString(b & 0xFF);
         if (r.length() < 2) {
