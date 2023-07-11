@@ -9,6 +9,12 @@ public abstract class Assert {
         }
     }
 
+    public static void isFalse(boolean expression, String errorMsg) {
+        if (expression) {
+            throw new IllegalArgumentException(errorMsg);
+        }
+    }
+
     public static void hasText(String text, String errorMsg) {
         if (StringUtils.isBlank(text)) {
             throw new IllegalArgumentException(errorMsg);

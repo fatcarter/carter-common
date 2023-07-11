@@ -13,6 +13,7 @@
         <module>common-core</module>
         <module>common-all</module>
         <module>common-net</module>
+        <module>common-validation</module>
     </modules>
 
     <properties>

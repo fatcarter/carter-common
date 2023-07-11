@@ -9,8 +9,7 @@
         <version>${revision}</version>
         <relativePath>../common-parent</relativePath>
     </parent>
-    <artifactId>common-all</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>common-validation</artifactId>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -18,19 +17,10 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>cn.fatcarter</groupId>
-            <artifactId>common-core</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.fatcarter</groupId>
-            <artifactId>common-net</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.fatcarter</groupId>
-            <artifactId>common-validation</artifactId>
-            <version>${revision}</version>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
