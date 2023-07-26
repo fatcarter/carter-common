@@ -1,4 +1,4 @@
-package cn.fatcarter.common.validation;
+package cn.fatcarter.common.validation.jakarta;
 
 import javax.validation.Constraint;
 import javax.validation.ConstraintValidator;
@@ -13,6 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = EnumValidator.Validator.class)
+@Deprecated
 public @interface EnumValidator {
     String message() default "值无效";
 

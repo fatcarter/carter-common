@@ -41,13 +41,16 @@ public class StreamUtils {
         return toMap(list, keyMapper, Function.identity());
     }
 
+    public static <E, K> Stream<K> mapToStream(Collection<E> list, Function<E, K> mapper) {
+        return list.stream().map(mapper);
+    }
 
     public static <E, K> List<K> mapToList(Collection<E> list, Function<E, K> mapper) {
-        return list.stream().map(mapper).collect(Collectors.toList());
+        return mapToStream(list, mapper).collect(Collectors.toList());
     }
 
     public static <E, K> Set<K> mapToSet(Collection<E> list, Function<E, K> mapper) {
-        return list.stream().map(mapper).collect(Collectors.toSet());
+        return mapToStream(list, mapper).collect(Collectors.toSet());
     }
 
     public static <E, K> Map<K, List<E>> grouping(Collection<E> list, Function<E, K> mapper) {

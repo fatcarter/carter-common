@@ -11,4 +11,10 @@ public class ArraysTest {
         System.out.println(array.length);
         System.out.println(java.util.Arrays.toString(array));
     }
+
+    @Test
+    public void testJoin(){
+        Integer[] of = Arrays.of(1, 3, 6);
+        System.out.println(ArrayUtils.join("-", of));;
+    }
 }

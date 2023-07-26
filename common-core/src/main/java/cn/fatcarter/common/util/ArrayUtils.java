@@ -17,4 +17,19 @@ public class ArrayUtils {
         }
         return true;
     }
+
+    public static <T> String join(String delimiter, T... ts) {
+        if (isEmpty(ts)) {
+            return "";
+        }
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < ts.length; i++) {
+            String value = String.valueOf(ts[i]);
+            builder.append(value);
+            if (i + 1 < ts.length) {
+                builder.append(delimiter);
+            }
+        }
+        return builder.toString();
+    }
 }
