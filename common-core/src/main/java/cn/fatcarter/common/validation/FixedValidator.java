@@ -1,4 +1,4 @@
-package cn.fatcarter.common.validation.jakarta;
+package cn.fatcarter.common.validation;
 
 import javax.validation.Constraint;
 import javax.validation.ConstraintValidator;

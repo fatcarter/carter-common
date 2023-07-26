@@ -1,7 +1,7 @@
 package cn.fatcarter.common.validation.javax.validator;
 
 import cn.fatcarter.common.validation.ValidatorSupport;
-import cn.fatcarter.common.validation.jakarta.Enums;
+import cn.fatcarter.common.validation.javax.Enums;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -10,9 +10,9 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnumsValidator extends ValidatorSupport implements ConstraintValidator<cn.fatcarter.common.validation.jakarta.Enums, Object> {
+public class EnumsValidator extends ValidatorSupport implements ConstraintValidator<Enums, Object> {
     private final List<String> accepted = new ArrayList<>();
-    private cn.fatcarter.common.validation.jakarta.Enums annotation;
+    private Enums annotation;
 
     @Override
     public void initialize(Enums annotation) {
