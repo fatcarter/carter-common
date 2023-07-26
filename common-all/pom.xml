@@ -32,6 +32,11 @@
             <artifactId>common-validation</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.fatcarter</groupId>
+            <artifactId>common-codec</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
 </project>
