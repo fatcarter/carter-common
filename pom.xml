@@ -14,6 +14,7 @@
         <module>common-all</module>
         <module>common-net</module>
         <module>common-validation</module>
+        <module>common-codec</module>
     </modules>
 
     <properties>
