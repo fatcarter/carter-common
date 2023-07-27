@@ -20,7 +20,8 @@ public class RSATest {
         RSA rsa = RSA.newKeyPair();
         String privateKey = rsa.getPrivateKey();
         String publicKey = rsa.getPublicKey();
-
+        System.out.println("privateKey: "+privateKey);
+        System.out.println("publicKey: " + publicKey);
         RSA newRsa = RSA.newKeyPair(publicKey, privateKey);
         Assert.assertEquals(newRsa.getPrivateKey(), privateKey);
         Assert.assertEquals(newRsa.getPublicKey(), publicKey);

@@ -1,12 +1,12 @@
 package cn.fatcarter.common.servlet.http.javax;
 
+import cn.fatcarter.common.util.IOUtils;
+
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -48,13 +48,7 @@ public class ReadableHttpServletRequestWrapper extends HttpServletRequestWrapper
         private final ByteArrayInputStream stream;
 
         public ReadableServletInputStream(ServletInputStream stream) throws IOException {
-            byte[] buffer = new byte[1024];
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            int len;
-            while ((len = stream.read(buffer)) != -1) {
-                out.write(buffer, 0, len);
-            }
-            this.stream = new ByteArrayInputStream(out.toByteArray());
+            this.stream = new ByteArrayInputStream(IOUtils.read(stream));
         }
 
         @Override

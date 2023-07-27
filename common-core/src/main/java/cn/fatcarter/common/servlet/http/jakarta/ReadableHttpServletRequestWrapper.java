@@ -1,12 +1,13 @@
 package cn.fatcarter.common.servlet.http.jakarta;
 
+import cn.fatcarter.common.util.IOUtils;
 import jakarta.servlet.ReadListener;
 import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
+import lombok.Getter;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -40,21 +41,32 @@ public class ReadableHttpServletRequestWrapper extends HttpServletRequestWrapper
         return stream;
     }
 
+    public byte[] getInputBytes() throws IOException {
+        ServletInputStream stream = getInputStream();
+        if (stream instanceof ReadableServletInputStream) {
+            return ((ReadableServletInputStream) stream).getBuf();
+        } else {
+            return IOUtils.read(stream);
+        }
+    }
+
     protected ServletInputStream getReadableInputStream() throws IOException {
         return new ReadableServletInputStream(super.getInputStream());
     }
 
     private static class ReadableServletInputStream extends ServletInputStream {
+        @Getter
         private final ByteArrayInputStream stream;
+        private final byte[] buf;
+
 
         public ReadableServletInputStream(ServletInputStream stream) throws IOException {
-            byte[] buffer = new byte[1024];
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            int len;
-            while ((len = stream.read(buffer)) != -1) {
-                out.write(buffer, 0, len);
-            }
-            this.stream = new ByteArrayInputStream(out.toByteArray());
+            this.buf = IOUtils.read(stream);
+            this.stream = new ByteArrayInputStream(this.buf);
+        }
+
+        private byte[] getBuf() {
+            return Arrays.copyOf(buf, buf.length);
         }
 
         @Override
