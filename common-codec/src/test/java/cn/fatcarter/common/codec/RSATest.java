@@ -10,6 +10,11 @@ import java.security.spec.InvalidKeySpecException;
 public class RSATest {
 
     @Test
+     public void test(){
+         System.out.println((-9 % 5)+5 );
+     }
+
+    @Test
     public void testNewKeyPair() {
         RSA rsa = RSA.newKeyPair();
         Assert.assertNotNull(rsa);
