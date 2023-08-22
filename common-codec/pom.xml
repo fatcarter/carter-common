@@ -27,5 +27,10 @@
             <artifactId>common-core</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.fatcarter</groupId>
+            <artifactId>common-net</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 </project>

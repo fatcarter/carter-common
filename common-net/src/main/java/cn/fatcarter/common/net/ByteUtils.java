@@ -99,16 +99,20 @@ public class ByteUtils {
         return bs;
     }
 
-    public static Integer toInt(byte... bytes) {
+    public static int toInt(byte... bytes) {
+        return (int) toLong(bytes);
+    }
 
+    public static long toLong(byte... bytes) {
+        int len = 8;
         byte[] bs = bytes;
-        if (bs.length < 4) {
-            byte[] b = new byte[]{0, 0, 0, 0};
+        if (bs.length < len) {
+            byte[] b = new byte[len];
             System.arraycopy(bs, 0, b, b.length - bs.length, bs.length);
             bs = b;
         }
-        int ans = 0;
-        for (int i = 0; i < 4; i++) {
+        long ans = 0;
+        for (int i = 0; i < len; i++) {
             ans <<= 8;
             ans |= bs[i] & 0xFF;
         }

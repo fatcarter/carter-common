@@ -2,6 +2,7 @@ package cn.fatcarter.common.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -67,6 +68,21 @@ public class StreamUtils {
 
     public static <E, T> List<T> filterMapToList(Collection<E> list, Predicate<E> filter, Function<E, T> mapper) {
         return list.stream().filter(filter).map(mapper).collect(Collectors.toList());
+    }
+
+    public static <T> T max(Collection<T> list, Comparator<T> comparator) {
+        return list.stream().max(comparator).orElse(null);
+    }
+
+    public static <T> T max(Collection<T> list, Comparator<T> comparator,T defaultValue) {
+        return list.stream().max(comparator).orElse(defaultValue);
+    }
+    public static <T> T min(Collection<T> list, Comparator<T> comparator) {
+        return list.stream().min(comparator).orElse(null);
+    }
+
+    public static <T> T min(Collection<T> list, Comparator<T> comparator,T defaultValue) {
+        return list.stream().min(comparator).orElse(defaultValue);
     }
 
     private static <T> BinaryOperator<T> throwingMerger() {
