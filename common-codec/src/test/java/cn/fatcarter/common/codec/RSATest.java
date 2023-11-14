@@ -14,6 +14,13 @@ public class RSATest {
          System.out.println((-9 % 5)+5 );
      }
 
+     @Test
+     public void test1() throws InvalidKeySpecException {
+        String key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsSVyH5R52GMs/WqYl/cwK0r47Z4FaKqvXBZ9vzHHYbsGo72naTffYJVHj2i5EMngAtBftimhOw1bRiirz7WmyK56OU7qBtiBfp+U+TLFN/mGxnAgG2H3m7u4cuoHjtNF7DBMslnh8bUZIoDGlqqHQ5mQY5/g5xd9+7crVjNzb5XC+XI06S5/4jlu6KSR/D5pa+37KvaJ4L2QyAEcwtRp/i/kM9DQ7+gaSD2SyToxU98hLtPv39KvYdkMHK2vJNmS1inO7V2vzbhrQ7Fq8FnrYZT5bSA6Iqrlu2OEzq+j0IsieeamQAHtcNSTnT3XcfHPYl9qsE6jIz3lp2+M00f3MQIDAQAB";
+         RSA rsa = RSA.newKeyPair(key, null);
+
+     }
+
     @Test
     public void testNewKeyPair() {
         RSA rsa = RSA.newKeyPair();
@@ -31,6 +38,7 @@ public class RSATest {
         Assert.assertEquals(newRsa.getPrivateKey(), privateKey);
         Assert.assertEquals(newRsa.getPublicKey(), publicKey);
     }
+
 
     @Test
     public void testPublicEncrypt() throws IllegalBlockSizeException, BadPaddingException {
