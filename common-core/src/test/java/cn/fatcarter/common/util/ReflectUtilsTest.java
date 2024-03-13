@@ -6,6 +6,7 @@ import lombok.Data;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
@@ -21,12 +22,31 @@ public class ReflectUtilsTest {
         private Integer age;
         private Float height;
         private Double weight;
+        private int score;
     }
 
     @Data
     public static class Teacher extends Person {
         @Alias("Subject")
         private String subject;
+    }
+
+    @Test
+    public void testSetFieldValue(){
+        Integer score = 10;
+        Student student = new Student();
+        student.setScore(5);
+        Field field = ReflectUtils.getField(student.getClass(), "score");
+        ReflectUtils.setFieldValue(student, field, score);
+        System.out.println("score" + score + ", result: " + student.getScore());
+        Assert.assertEquals("设置数值失败!", score, Integer.valueOf(student.getScore()));
+
+        Float height = 1.84F;
+        field = ReflectUtils.getField(student.getClass(), "height");
+        ReflectUtils.setFieldValue(student, field, height);
+        System.out.println("height" + height + ", result: " + student.getHeight());
+        Assert.assertEquals("设置数值失败!", height, student.getHeight());
+
     }
 
     @Test

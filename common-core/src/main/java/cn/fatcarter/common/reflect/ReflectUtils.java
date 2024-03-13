@@ -54,6 +54,15 @@ public class ReflectUtils {
         return field.getName();
     }
 
+    public static void setFieldValue(Object target, Field field, Object value) {
+        setAccessible(field);
+        try {
+            field.set(target, value);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static Object getFieldValue(Object target, Field field) {
         if (field == null) {
             return null;
