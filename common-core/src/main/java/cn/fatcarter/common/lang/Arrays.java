@@ -12,4 +12,8 @@ public class Arrays {
         System.arraycopy(t, 0, o, 0, t.length);
         return o;
     }
+
+    public static <T> T[] newInstance(Class<T> clz,int size) {
+        return (T[]) Array.newInstance(clz, size);
+    }
 }

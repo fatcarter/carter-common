@@ -1,14 +1,25 @@
 package cn.fatcarter.common.util;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 public class StringUtilsTest {
-    public static void main(String[] args) {
-        int i = 1;
-        System.out.println(i << 30);
-        System.out.println(i<<31);
-        i++;
-        System.out.println((i << 30) - 1);
-        System.out.println(i << 31);
-        System.out.println(Integer.MAX_VALUE);
-        System.out.println((Integer.MAX_VALUE - 1) / (double) 2);
+
+
+    @Test
+    public void blankTest(){
+        String whitespace = " ";
+        String empty = "";
+        String chars = "sdf";
+        String innerWhitespace = "sdf fsd";
+        String outerWhitespace = " sdfsf ";
+        String all = " sdf sdf ";
+
+        Assert.assertTrue(StringUtils.isBlank(whitespace));
+        Assert.assertTrue(StringUtils.isBlank(empty));
+        Assert.assertFalse(StringUtils.isBlank(chars));
+        Assert.assertFalse(StringUtils.isBlank(innerWhitespace));
+        Assert.assertFalse(StringUtils.isBlank(outerWhitespace));
+        Assert.assertFalse(StringUtils.isBlank(all));
     }
 }

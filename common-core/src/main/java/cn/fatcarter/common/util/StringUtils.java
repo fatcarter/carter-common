@@ -46,9 +46,17 @@ public final class StringUtils {
         return !containsText(src);
     }
 
+    public static boolean isNotBlank(String src) {
+        return !isBlank(src);
+    }
+
 
     public static boolean isEmpty(String src) {
         return src == null || src.trim().isEmpty();
+    }
+
+    public static boolean isNotEmpty(String src) {
+        return !isEmpty(src);
     }
 
     private static boolean containsText(CharSequence str) {
@@ -59,10 +67,5 @@ public final class StringUtils {
             }
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-        String str = "操作失败!";
-        System.out.println(isBlank(str));
     }
 }

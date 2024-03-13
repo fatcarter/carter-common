@@ -37,6 +37,16 @@
             <artifactId>common-codec</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.fatcarter</groupId>
+            <artifactId>common-serialize</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.fatcarter</groupId>
+            <artifactId>common-rpc</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
 </project>
