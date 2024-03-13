@@ -89,7 +89,7 @@ public class ConflictFutures {
             future.run();
         } else {
             logger.debug("Run future [{}] with key [{}] on executor service [{}]", future.getFuture(), future.getKey(), executorService);
-            executorService.submit(future::run);
+            executorService.execute(future::run);
         }
     }
 
