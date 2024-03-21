@@ -47,6 +47,11 @@
             <artifactId>common-rpc</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.fatcarter</groupId>
+            <artifactId>common-reactive</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
 </project>
