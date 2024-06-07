@@ -25,5 +25,7 @@ public class Op {
         return Optional.of(t);
     }
 
-
+    public static <T> Optional<T> e() {
+        return Optional.empty();
+    }
 }
