@@ -34,8 +34,12 @@ public class StreamUtils {
         return list.stream().collect(Collectors.toMap(keyMapper, valueMapper, mergeFunction, creator));
     }
 
+    public static <M extends Map<K, V>, E, K, V> M toMap(Collection<E> list, Function<E, K> keyMapper, Function<E, V> valueMapper, Supplier<M> creator) {
+        return list.stream().collect(Collectors.toMap(keyMapper, valueMapper, throwingMerger(), creator));
+    }
+
     public static <E, K, V> Map<K, V> toMap(Collection<E> list, Function<E, K> keyMapper, Function<E, V> valueMapper) {
-        return toMap(list, keyMapper, valueMapper, throwingMerger(), HashMap::new);
+        return toMap(list, keyMapper, valueMapper, HashMap::new);
     }
 
     public static <E, K> Map<K, E> toMap(Collection<E> list, Function<E, K> keyMapper) {
@@ -85,7 +89,7 @@ public class StreamUtils {
         return list.stream().min(comparator).orElse(defaultValue);
     }
 
-    private static <T> BinaryOperator<T> throwingMerger() {
+    public static <T> BinaryOperator<T> throwingMerger() {
         return (u, v) -> {
             throw new IllegalStateException(String.format("Duplicate key %s", u));
         };
