@@ -3,6 +3,7 @@ package cn.fatcarter.common.util;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -45,6 +46,22 @@ public class Date8Utils {
 
     public static LocalDateTime parseDate(String src, DateTimeFormatter formatter) {
         return LocalDateTime.parse(src, formatter);
+    }
+
+    public static LocalDateTime atStartOfDay(LocalDateTime date) {
+        return Op.opn(date).map(LocalDateTime::toLocalDate).map(Date8Utils::atStartOfDay).orElse(null);
+    }
+
+    public static LocalDateTime atStartOfDay(LocalDate date) {
+        return Op.opn(date).map(LocalDate::atStartOfDay).orElse(null);
+    }
+
+    public static LocalDateTime atEndOfDay(LocalDateTime date) {
+        return Op.opn(date).map(LocalDateTime::toLocalDate).map(Date8Utils::atEndOfDay).orElse(null);
+    }
+
+    public static LocalDateTime atEndOfDay(LocalDate date) {
+        return Op.opn(date).map(t -> t.atTime(LocalTime.MAX)).orElse(null);
     }
 
     public static String format(LocalDateTime dateTime, DateTimeFormatter formatter) {
