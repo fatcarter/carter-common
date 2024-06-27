@@ -1,5 +1,6 @@
 package cn.fatcarter.common.util;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,6 +8,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.HashMap;
@@ -62,6 +64,11 @@ public class Date8Utils {
 
     public static LocalDateTime atEndOfDay(LocalDate date) {
         return Op.opn(date).map(t -> t.atTime(LocalTime.MAX)).orElse(null);
+    }
+
+    public static Duration diff(LocalDateTime d1, LocalDateTime d2) {
+        long diff = Date8Utils.toTimestamp(d2) - Date8Utils.toTimestamp(d1);
+        return Duration.of(diff, ChronoUnit.MILLIS);
     }
 
     public static String format(LocalDateTime dateTime, DateTimeFormatter formatter) {
