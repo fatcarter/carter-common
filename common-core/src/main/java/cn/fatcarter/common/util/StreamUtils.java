@@ -1,7 +1,9 @@
 package cn.fatcarter.common.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -54,6 +56,10 @@ public class StreamUtils {
         return mapToStream(list, mapper).collect(Collectors.toList());
     }
 
+    public static <E, K> List<K> mapToListDistinct(Collection<E> list, Function<E, K> mapper) {
+        return new ArrayList<>(mapToSet(list, mapper));
+    }
+
     public static <E, K> Set<K> mapToSet(Collection<E> list, Function<E, K> mapper) {
         return mapToStream(list, mapper).collect(Collectors.toSet());
     }
@@ -88,6 +94,28 @@ public class StreamUtils {
     public static <T> T min(Collection<T> list, Comparator<T> comparator,T defaultValue) {
         return list.stream().min(comparator).orElse(defaultValue);
     }
+
+    public static <T> List<T> distinct(Collection<T> list) {
+        return distinct(list, Function.identity());
+    }
+
+
+    public static <T, V> List<T> distinct(Collection<T> list, Function<T, V> valueMapper) {
+        Set<V> exists = new HashSet<>();
+        return list.stream().filter(item -> exists.add(valueMapper.apply(item))).collect(Collectors.toList());
+    }
+
+    @SafeVarargs
+    public static <T> List<T> distinct(T first, T... others) {
+        if (others == null || others.length == 0) {
+            return new ArrayList<>(Collections.singletonList(first));
+        }
+        List<T> list = new ArrayList<>();
+        list.add(first);
+        list.addAll(Arrays.asList(others));
+        return distinct(list, Function.identity());
+    }
+
 
     public static <T> BinaryOperator<T> throwingMerger() {
         return (u, v) -> {

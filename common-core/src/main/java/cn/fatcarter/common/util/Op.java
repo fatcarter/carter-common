@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class Op {
     public static <S, T> T map(S s, Function<S, T> mapper) {
@@ -32,10 +33,26 @@ public class Op {
         return n(collection).filter(Predicates.not(Collection::isEmpty));
     }
 
+    public static <T> Stream<T> flatMap(Collection<T> collection) {
+        return notEmpty(collection).stream().flatMap(Collection::stream);
+    }
+
+    public static <T> Optional<T> findAny(Collection<T> collection) {
+        return flatMap(collection).findAny();
+    }
+
+    public static <T> Optional<T> findFirst(Collection<T> collection) {
+        return flatMap(collection).findFirst();
+    }
+
     public static <K, V> Optional<Map<K, V>> notEmpty(Map<K, V> map) {
         return n(map).filter(Predicates.not(Map::isEmpty));
     }
 
+
+    public static <T> Optional<String> notBlank(String value){
+        return n(value).filter(StringUtils::isNotBlank);
+    }
 
     public static <T> Optional<T> op(T t) {
         return of(t);
