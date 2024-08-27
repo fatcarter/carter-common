@@ -3,7 +3,9 @@ package cn.fatcarter.common.util;
 import cn.fatcarter.common.function.Predicates;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -31,6 +33,10 @@ public class Op {
 
     public static <T> Optional<Collection<T>> notEmpty(Collection<T> collection) {
         return n(collection).filter(Predicates.not(Collection::isEmpty));
+    }
+
+    public static <T> Optional<Collection<T>> withoutNull(Collection<T> collection) {
+        return notEmpty(flatMap(collection).filter(Objects::nonNull).toList());
     }
 
     public static <T> Stream<T> flatMap(Collection<T> collection) {
