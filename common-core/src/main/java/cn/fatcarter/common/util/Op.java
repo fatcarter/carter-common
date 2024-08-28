@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -70,6 +71,14 @@ public class Op {
 
     public static <T> Optional<T> of(T t) {
         return Optional.of(t);
+    }
+
+    public static <T> boolean test(T value,Predicate<T> predicate) {
+        return test(value, predicate, false);
+    }
+
+    public static <T> boolean test(T value,Predicate<T> predicate,boolean def) {
+        return n(value).map(predicate::test).orElse(def);
     }
 
 
