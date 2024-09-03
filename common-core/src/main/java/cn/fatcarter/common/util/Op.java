@@ -37,7 +37,19 @@ public class Op {
     }
 
     public static <T> Optional<Collection<T>> withoutNull(Collection<T> collection) {
-        return notEmpty(flatMap(collection).filter(Objects::nonNull).toList());
+        return without(collection, Objects::nonNull);
+    }
+
+    public static <T> Optional<Collection<String>> withoutBlank(Collection<String> collection) {
+        return without(collection, StringUtils::isNotBlank);
+    }
+
+    public static <T> Optional<Collection<T>> without(Collection<T> collection, Predicate<T> predicate) {
+        return notEmpty(flatMap(collection).filter(predicate).toList());
+    }
+
+    public static <T> Optional<Collection<T>> keep(Collection<T> collection, Predicate<T> predicate) {
+        return without(collection, predicate.negate());
     }
 
     public static <T> Stream<T> flatMap(Collection<T> collection) {
@@ -55,7 +67,6 @@ public class Op {
     public static <K, V> Optional<Map<K, V>> notEmpty(Map<K, V> map) {
         return n(map).filter(Predicates.not(Map::isEmpty));
     }
-
 
     public static <T> Optional<String> notBlank(String value){
         return n(value).filter(StringUtils::isNotBlank);

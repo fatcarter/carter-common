@@ -1,8 +1,11 @@
 package cn.fatcarter.common.util;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class Mappers {
     public static <T, K> Function<List<T>, Map<K, T>> toMapMapper(Function<T, K> keyMapper) {
@@ -17,13 +20,12 @@ public class Mappers {
 //        return list -> StreamUtils.filter(list, predicate);
 //    }
 //
-//    public static <T> Function<T, Boolean> distinctByKey(Function<T, String> keyMapper) {
-//        Set<String> exits = new HashSet<>();
-//        return value -> {
-//            String key = keyMapper.apply(value);
-//            return exits.add(key);
-//        };
-//    }
-
-
+    public static <T> Function<List<T>, List<T>> distinctByKey(Function<T, String> keyMapper) {
+        Set<String> exits = new HashSet<>();
+        Predicate<T> predicate = item -> {
+            String key = keyMapper.apply(item);
+            return exits.add(key);
+        };
+        return value -> value.stream().filter(predicate).toList();
+    }
 }
