@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -93,6 +94,10 @@ public class StreamUtils {
 
     public static <T> T min(Collection<T> list, Comparator<T> comparator,T defaultValue) {
         return list.stream().min(comparator).orElse(defaultValue);
+    }
+
+    public static <T> Optional<T> findFirst(Collection<T> list, Predicate<T> filter) {
+        return list.stream().filter(filter).findFirst();
     }
 
     public static <T> List<T> distinct(Collection<T> list) {
