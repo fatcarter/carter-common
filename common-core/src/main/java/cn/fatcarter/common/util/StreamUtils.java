@@ -41,8 +41,16 @@ public class StreamUtils {
         return list.stream().collect(Collectors.toMap(keyMapper, valueMapper, throwingMerger(), creator));
     }
 
+    public static <E, K, V> Map<K, V> toMap(Collection<E> list, Function<E, K> keyMapper, Function<E, V> valueMapper, BinaryOperator<V> mergeFunction) {
+        return toMap(list, keyMapper, valueMapper, mergeFunction, HashMap::new);
+    }
+
     public static <E, K, V> Map<K, V> toMap(Collection<E> list, Function<E, K> keyMapper, Function<E, V> valueMapper) {
-        return toMap(list, keyMapper, valueMapper, HashMap::new);
+        return toMap(list, keyMapper, valueMapper, () -> new HashMap<>());
+    }
+
+    public static <E, K> Map<K, E> toMap(Collection<E> list, Function<E, K> keyMapper, BinaryOperator<E> mergeFunc) {
+        return toMap(list, keyMapper, Function.identity(), mergeFunc);
     }
 
     public static <E, K> Map<K, E> toMap(Collection<E> list, Function<E, K> keyMapper) {
