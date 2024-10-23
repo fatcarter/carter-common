@@ -1,8 +1,10 @@
 package cn.fatcarter.common.util;
 
 import cn.fatcarter.common.lang.Arrays;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+@Slf4j
 public class ArraysTest {
 
     @Test
@@ -10,6 +12,7 @@ public class ArraysTest {
         Integer[] array = Arrays.of(1, 2, 5);
         System.out.println(array.length);
         System.out.println(java.util.Arrays.toString(array));
+        log.info("array.length={}", array.length);
     }
 
     @Test
