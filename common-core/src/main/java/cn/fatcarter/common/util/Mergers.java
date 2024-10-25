@@ -2,7 +2,7 @@ package cn.fatcarter.common.util;
 
 import java.util.function.BinaryOperator;
 
-public class Merger {
+public class Mergers {
     public static <T> BinaryOperator<T> firstMerger() {
         return (m1, m2) -> m1;
     }

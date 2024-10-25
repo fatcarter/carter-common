@@ -1,5 +1,7 @@
 package cn.fatcarter.common.util;
 
+import java.util.Arrays;
+
 public final class StringUtils {
     public static String padStartBlank(String src, int size) {
         return padStart(src, size, " ");
@@ -59,6 +61,16 @@ public final class StringUtils {
         return !isEmpty(src);
     }
 
+    public static String repeat(String src, int count) {
+        return repeat(src, "", count);
+    }
+
+    public static String repeat(String src, String delimiter, int count) {
+        String[] sources = new String[count];
+        Arrays.fill(sources, src);
+        return String.join(delimiter, sources);
+    }
+
     private static boolean containsText(CharSequence str) {
         int len = str.length();
         for (int i = 0; i < len; i++) {
@@ -68,4 +80,5 @@ public final class StringUtils {
         }
         return false;
     }
+
 }

@@ -73,8 +73,8 @@ public class StreamUtils {
         return mapToStream(list, mapper).collect(Collectors.toSet());
     }
 
-    public static <E, K> Map<K, List<E>> grouping(Collection<E> list, Function<E, K> mapper) {
-        return list.stream().collect(Collectors.groupingBy(mapper));
+    public static <E, K> Map<K, List<E>> grouping(Collection<E> list, Function<E, K> keyMapper) {
+        return list.stream().collect(Collectors.groupingBy(keyMapper));
     }
 
     public static <E> List<E> filter(Collection<E> list, Predicate<E> filter) {
@@ -131,7 +131,7 @@ public class StreamUtils {
 
 
     public static <T> BinaryOperator<T> throwingMerger() {
-        return Merger.throwMerger();
+        return Mergers.throwMerger();
     }
 
 }
