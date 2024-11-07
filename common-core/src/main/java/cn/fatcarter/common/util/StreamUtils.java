@@ -20,18 +20,20 @@ import java.util.stream.Stream;
 
 public class StreamUtils {
     public static <E, T> boolean mapNoneMatch(Collection<E> list, Function<? super E, T> mapper, Predicate<? super T> predicate) {
-        return list.stream().map(mapper).noneMatch(predicate);
+        return CollectionUtils.isEmpty(list) || list.stream().map(mapper).noneMatch(predicate);
     }
     public static <E, T> boolean mapAnyMatch(Collection<E> list, Function<? super E, T> mapper, Predicate<? super T> predicate) {
-        return list.stream().map(mapper).anyMatch(predicate);
+        return CollectionUtils.isNotEmpty(list) && list.stream().map(mapper).anyMatch(predicate);
     }
 
     public static <E> boolean noneMatch(Collection<E> list, Predicate<? super E> predicate) {
-        return list.stream().noneMatch(predicate);
+        return CollectionUtils.isEmpty(list) || list.stream().noneMatch(predicate);
     }
+
     public static <E> boolean anyMatch(Collection<E> list, Predicate<? super E> predicate) {
-        return list.stream().anyMatch(predicate);
+        return CollectionUtils.isNotEmpty(list) && list.stream().anyMatch(predicate);
     }
+
     public static <M  extends Map<K, V>,E, K, V> M toMap(Collection<E> list, Function<E, K> keyMapper, Function<E, V> valueMapper, BinaryOperator<V> mergeFunction,
                                             Supplier<M> creator) {
         return list.stream().collect(Collectors.toMap(keyMapper, valueMapper, mergeFunction, creator));
