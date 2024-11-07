@@ -19,11 +19,22 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamUtils {
+
+
     public static <E, T> boolean mapNoneMatch(Collection<E> list, Function<? super E, T> mapper, Predicate<? super T> predicate) {
         return CollectionUtils.isEmpty(list) || list.stream().map(mapper).noneMatch(predicate);
     }
     public static <E, T> boolean mapAnyMatch(Collection<E> list, Function<? super E, T> mapper, Predicate<? super T> predicate) {
         return CollectionUtils.isNotEmpty(list) && list.stream().map(mapper).anyMatch(predicate);
+    }
+
+    public static <E, T> boolean mapAllMatch(Collection<E> list, Function<? super E, T> mapper, Predicate<? super T> predicate) {
+        return CollectionUtils.isEmpty(list) || list.stream().map(mapper).allMatch(predicate);
+    }
+
+
+    public static <E> boolean allMatch(Collection<E> list, Predicate<? super E> predicate) {
+        return CollectionUtils.isEmpty(list) || list.stream().allMatch(predicate);
     }
 
     public static <E> boolean noneMatch(Collection<E> list, Predicate<? super E> predicate) {
