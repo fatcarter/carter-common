@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 @Setter
 public final class TaskQueue<T extends Runnable> extends LinkedBlockingQueue<Runnable> {
 
-    private EdgerThreadPoolExecutor executor;
+    private EagerThreadPoolExecutor executor;
 
     public TaskQueue(int capacity) {
         super(capacity);
