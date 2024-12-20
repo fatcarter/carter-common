@@ -13,6 +13,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class Date8Utils {
     public static DateTimeFormatter yyyyMMdd = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -119,5 +120,14 @@ public class Date8Utils {
             return "";
         }
         return ((hour < 10) ? "0" + hour : hour) + ":00";
+    }
+
+    public static LocalDateTime min(LocalDateTime... times) {
+        Assert.isTrue(times != null && times.length > 0, "times must not be empty");
+        return Stream.of(times).min(LocalDateTime::compareTo).get();
+    }
+    public static LocalDateTime max(LocalDateTime... times) {
+        Assert.isTrue(times != null && times.length > 0, "times must not be empty");
+        return Stream.of(times).max(LocalDateTime::compareTo).get();
     }
 }
