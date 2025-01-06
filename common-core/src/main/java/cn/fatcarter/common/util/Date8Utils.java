@@ -126,8 +126,19 @@ public class Date8Utils {
         Assert.isTrue(times != null && times.length > 0, "times must not be empty");
         return Stream.of(times).min(LocalDateTime::compareTo).get();
     }
+
+    public static LocalDate min(LocalDate... times) {
+        Assert.isTrue(times != null && times.length > 0, "times must not be empty");
+        return Stream.of(times).min(LocalDate::compareTo).get();
+    }
+
     public static LocalDateTime max(LocalDateTime... times) {
         Assert.isTrue(times != null && times.length > 0, "times must not be empty");
         return Stream.of(times).max(LocalDateTime::compareTo).get();
+    }
+
+    public static LocalDate max(LocalDate... times) {
+        Assert.isTrue(times != null && times.length > 0, "times must not be empty");
+        return Stream.of(times).max(LocalDate::compareTo).get();
     }
 }
