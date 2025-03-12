@@ -48,4 +48,29 @@ public final class BigDecimals {
     public static BigDecimal divide(String v1, String v2, int scale, RoundingMode roundingMode) {
         return new BigDecimal(v1).divide(new BigDecimal(v2), scale, roundingMode);
     }
+
+
+    public static boolean isGreater(BigDecimal v1, BigDecimal v2) {
+        return v1.compareTo(v2) > 0;
+    }
+
+    public static boolean isLess(BigDecimal v1, BigDecimal v2) {
+        return v1.compareTo(v2) < 0;
+    }
+
+    public static boolean isSame(BigDecimal v1, BigDecimal v2) {
+        return v1.equals(v2);
+    }
+
+    public static boolean isPositive(BigDecimal v) {
+        return isGreater(v, ZERO);
+    }
+
+    public static boolean isNegative(BigDecimal v) {
+        return isLess(v, ZERO);
+    }
+
+    public static boolean isZero(BigDecimal v) {
+        return isSame(v, ZERO);
+    }
 }
