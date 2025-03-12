@@ -3,7 +3,6 @@ package cn.fatcarter.common.util;
 import cn.fatcarter.common.function.Predicates;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -13,6 +12,17 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class Op {
+    public static <T> T orNull(T t) {
+        return Op.n(t).orElse(null);
+    }
+
+    public static <T> T orElse(T t, Supplier<? extends T> getter) {
+        return Op.n(t).orElseGet(getter);
+    }
+
+    public static <T> T orElse(T t, T def) {
+        return Op.n(t).orElse(def);
+    }
     public static <S, T> T map(S s, Function<S, T> mapper) {
         return map(s, mapper, (T) null);
     }
