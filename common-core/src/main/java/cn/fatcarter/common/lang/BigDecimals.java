@@ -7,13 +7,36 @@ public final class BigDecimals {
     public static final BigDecimal ZERO = new BigDecimal("0");
     public static final BigDecimal ONE = new BigDecimal("1");
     public static final BigDecimal TEN = new BigDecimal("10");
-    public static final BigDecimal HUNDRED = new BigDecimal("100");
-    public static final BigDecimal THOUSAND = new BigDecimal("1000");
-    public static final BigDecimal TEN_THOUSAND = new BigDecimal("10000");
-    public static final BigDecimal HUNDRED_THOUSAND = new BigDecimal("10000");
-    public static final BigDecimal MILLION = new BigDecimal("1000000");
-    public static final BigDecimal TEN_MILLION = new BigDecimal("10000000");
-    public static final BigDecimal HUNDRED_MILLION = new BigDecimal("100000000");
+    public static final BigDecimal HUNDRED = TEN.multiply(TEN);
+    public static final BigDecimal THOUSAND = HUNDRED.multiply(TEN);
+    public static final BigDecimal TEN_THOUSAND = THOUSAND.multiply(TEN);
+    public static final BigDecimal HUNDRED_THOUSAND = TEN_THOUSAND.multiply(TEN);
+    public static final BigDecimal MILLION = HUNDRED_THOUSAND.multiply(TEN);
+    public static final BigDecimal TEN_MILLION = MILLION.multiply(TEN);
+    public static final BigDecimal HUNDRED_MILLION = TEN_MILLION.multiply(TEN);
+    public static final BigDecimal THOUSAND_MILLION = HUNDRED_MILLION.multiply(TEN);
+
+    // Time
+    public static final BigDecimal MILLIS_OF_SECONDS = THOUSAND;
+    public static final BigDecimal SECONDS_OF_MINUTE = new BigDecimal("60");
+    public static final BigDecimal MINUTES_OF_HOUR = SECONDS_OF_MINUTE;
+    public static final BigDecimal HOURS_OF_DAY = new BigDecimal("24");
+    public static final BigDecimal DAYS_OF_WEEK = new BigDecimal("7");
+
+    public static final BigDecimal MILLIS_OF_MINUTE = MILLIS_OF_SECONDS.multiply(SECONDS_OF_MINUTE);
+    public static final BigDecimal MILLIS_OF_HOUR = MILLIS_OF_MINUTE.multiply(MINUTES_OF_HOUR);
+    public static final BigDecimal MILLIS_OF_DAY = MILLIS_OF_HOUR.multiply(HOURS_OF_DAY);
+    public static final BigDecimal MILLIS_OF_WEEK = MILLIS_OF_DAY.multiply(DAYS_OF_WEEK);
+
+
+    public static final BigDecimal SECONDS_OF_HOUR = SECONDS_OF_MINUTE.multiply(MINUTES_OF_HOUR);
+    public static final BigDecimal SECONDS_OF_DAY = SECONDS_OF_HOUR.multiply(HOURS_OF_DAY);
+    public static final BigDecimal SECONDS_OF_WEEK = SECONDS_OF_DAY.multiply(DAYS_OF_WEEK);
+
+    public static final BigDecimal MINUTES_OF_DAY = MINUTES_OF_HOUR.multiply(HOURS_OF_DAY);
+    public static final BigDecimal MINUTES_OF_WEEK = MINUTES_OF_DAY.multiply(DAYS_OF_WEEK);
+
+
 
     public static BigDecimal divide(Integer v1, Integer v2, RoundingMode roundingMode) {
         return new BigDecimal(v1).divide(new BigDecimal(v2), roundingMode);
