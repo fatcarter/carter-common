@@ -96,4 +96,11 @@ public final class BigDecimals {
     public static boolean isZero(BigDecimal v) {
         return isSame(v, ZERO);
     }
+
+    public static BigDecimal min(BigDecimal v1, BigDecimal v2) {
+        return isLess(v1, v2) ? v1 : v2;
+    }
+    public static BigDecimal max(BigDecimal v1, BigDecimal v2) {
+        return isGreater(v1, v2) ? v1 : v2;
+    }
 }

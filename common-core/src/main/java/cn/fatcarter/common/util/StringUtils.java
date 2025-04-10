@@ -3,6 +3,8 @@ package cn.fatcarter.common.util;
 import java.util.Arrays;
 
 public final class StringUtils {
+    public static final String EMPTY = "";
+
     public static String padStartBlank(String src, int size) {
         return padStart(src, size, " ");
     }

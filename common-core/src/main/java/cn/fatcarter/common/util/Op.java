@@ -23,6 +23,14 @@ public class Op {
     public static <T> T orElse(T t, T def) {
         return Op.n(t).orElse(def);
     }
+
+    public static <S> String mapStr(S s, Function<S, String> mapper) {
+        return mapStr(s, mapper, StringUtils.EMPTY);
+    }
+    public static <S> String mapStr(S s ,Function<S,String> mapper,String def){
+        return map(s, mapper, def);
+    }
+
     public static <S, T> T map(S s, Function<S, T> mapper) {
         return map(s, mapper, (T) null);
     }
