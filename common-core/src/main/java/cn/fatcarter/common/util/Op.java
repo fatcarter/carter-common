@@ -43,6 +43,10 @@ public class Op {
         return Optional.ofNullable(s).map(mapper).orElseGet(supplier);
     }
 
+    public static <S, T> Optional<T> mapOp(S s, Function<S, T> mapper) {
+        return Optional.ofNullable(s).map(mapper);
+    }
+
     public static <T> Optional<T> n(T t) {
         return opn(t);
     }

@@ -4,9 +4,18 @@ import java.util.Arrays;
 
 public final class StringUtils {
     public static final String EMPTY = "";
+    public static final String SPACE = " ";
 
+    public static String padStartSpace(String src, int size) {
+        return padStart(src, size, SPACE);
+    }
+
+    /**
+     * @deprecated use padStartSpace
+     */
+    @Deprecated
     public static String padStartBlank(String src, int size) {
-        return padStart(src, size, " ");
+        return padStartSpace(src, size);
     }
 
     public static String padStartZero(String src, int size) {
@@ -14,18 +23,25 @@ public final class StringUtils {
     }
 
     public static String padStart(String src, int size, String c) {
-        if (size == 1) {
-            return c + src;
+        if (src == null) {
+            return null;
         }
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            builder.append(c);
+        if (src.length() > size) {
+            return src;
         }
-        return builder.append(src).toString();
+        return repeat(c, size - src.length()) + src;
     }
 
+    /**
+     * @deprecated use padEndSpace
+     */
+    @Deprecated
     public static String padEndBlank(String src, int size) {
-        return padEnd(src, size, " ");
+        return padEndSpace(src, size);
+    }
+
+    public static String padEndSpace(String src, int size) {
+        return padEnd(src, size, SPACE);
     }
 
     public static String padEndZero(String src, int size) {
@@ -33,14 +49,11 @@ public final class StringUtils {
     }
 
     public static String padEnd(String src, int size, String c) {
-        if (size == 1) {
-            return src + c;
+        if (src == null) return null;
+        if (src.length() > size) {
+            return src;
         }
-        StringBuilder builder = new StringBuilder(src);
-        for (int i = 0; i < size; i++) {
-            builder.append(c);
-        }
-        return builder.toString();
+        return src + repeat(c, size - src.length());
     }
 
     public static boolean isBlank(String src) {
