@@ -10,9 +10,13 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class Date8Utils {
@@ -140,5 +144,27 @@ public class Date8Utils {
     public static LocalDate max(LocalDate... times) {
         Assert.isTrue(times != null && times.length > 0, "times must not be empty");
         return Stream.of(times).max(LocalDate::compareTo).get();
+    }
+
+    public static void eachDays(LocalDate start, LocalDate end, Consumer<LocalDate> consumer) {
+        eachDays(start, end, (day) -> {
+            consumer.accept(day);
+            return null;
+        });
+    }
+
+    public static <T> List<T> eachDays(LocalDate start, LocalDate end, Function<LocalDate, T> mapper) {
+        return StreamUtils.mapToList(listDays(start, end), mapper);
+    }
+
+    public static List<LocalDate> listDays(LocalDate start, LocalDate end) {
+        List<LocalDate> days = new ArrayList<>();
+        long dayCount = ChronoUnit.DAYS.between(start, end);
+        int inc = 0;
+        while (inc <= dayCount) {
+            days.add(start.plusDays(inc));
+            inc++;
+        }
+        return days;
     }
 }
