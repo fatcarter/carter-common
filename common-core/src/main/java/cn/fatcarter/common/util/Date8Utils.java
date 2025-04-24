@@ -157,6 +157,31 @@ public class Date8Utils {
         return StreamUtils.mapToList(listDays(start, end), mapper);
     }
 
+    public static void eachMonths(LocalDate start, LocalDate end, Consumer<LocalDate> consumer) {
+        eachMonths(start, end, (day) -> {
+            consumer.accept(day);
+            return null;
+        });
+    }
+
+    public static <T> List<T> eachMonths(LocalDate start, LocalDate end, Function<LocalDate, T> mapper) {
+        return StreamUtils.mapToList(listMonths(start, end), mapper);
+    }
+
+
+    public static List<LocalDate> listMonths(LocalDate start, LocalDate end) {
+        start = start.withDayOfMonth(1);
+        end = end.withDayOfMonth(1);
+        long monthCount = ChronoUnit.MONTHS.between(start, end);
+        int inc = 0;
+        List<LocalDate> months = new ArrayList<>();
+        while (inc <= monthCount) {
+            months.add(start.plusMonths(inc));
+            inc++;
+        }
+        return months;
+    }
+
     public static List<LocalDate> listDays(LocalDate start, LocalDate end) {
         List<LocalDate> days = new ArrayList<>();
         long dayCount = ChronoUnit.DAYS.between(start, end);

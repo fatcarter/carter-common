@@ -34,4 +34,27 @@ public class Date8UtilsTest {
     }
 
 
+    @Test
+    public void testListMonths(){
+        List<LocalDate> months = Date8Utils.listMonths(LocalDate.of(2025, 4, 24), LocalDate.of(2025, 6, 27));
+        System.out.println(months);
+        Assert.assertEquals(3, months.size());
+        Assert.assertEquals(LocalDate.of(2025, 4, 1), months.get(0));
+        Assert.assertEquals(LocalDate.of(2025, 5, 1), months.get(1));
+        Assert.assertEquals(LocalDate.of(2025, 6, 1), months.get(2));
+    }
+
+    @Test
+    public void testEachMonths(){
+        List<LocalDate> months = new ArrayList<>();
+        Date8Utils.eachMonths(LocalDate.of(2025, 4, 24), LocalDate.of(2025, 6, 27), month -> {
+            months.add(month);
+        });
+        System.out.println(months);
+        Assert.assertEquals(3, months.size());
+        Assert.assertEquals(LocalDate.of(2025, 4, 1), months.get(0));
+        Assert.assertEquals(LocalDate.of(2025, 5, 1), months.get(1));
+        Assert.assertEquals(LocalDate.of(2025, 6, 1), months.get(2));
+    }
+
 }
