@@ -47,10 +47,66 @@ public class Date8Utils {
         return LocalDateTime.ofInstant(date.toInstant(), TIME_ZONE);
     }
 
+    public static LocalDateTime parseDateTime(String src, DateTimeFormatter formatter) {
+        if (StringUtils.isBlank(src)) return null;
+        return LocalDateTime.parse(src, formatter);
+    }
+
+    public static LocalDateTime parseDateTime(String src, String pattern) {
+        return parseDateTime(src, DateTimeFormatter.ofPattern(pattern));
+    }
+
+    /**
+     * 字符串转LocalDateTime, 使用yyyy-MM-dd HH:mm:ss格式
+     *
+     * @param src
+     * @return
+     */
+    public static LocalDateTime parseDateTime(String src) {
+        return parseDateTime(src, yyyyMMddHHmmss);
+    }
+
+    /**
+     * 字符串转LocalDate, 使用 yyyy-MM-dd 格式
+     *
+     * @param src
+     * @return
+     */
+    public static LocalDate parseLocalDate(String src) {
+        return parseLocalDate(src, yyyyMMdd);
+    }
+
+    public static LocalDate parseLocalDate(String src, DateTimeFormatter formatter) {
+        if (StringUtils.isBlank(src)) return null;
+        return LocalDate.parse(src, formatter);
+    }
+
+    public static LocalDate parseLocalDate(String src, String pattern) {
+        return parseLocalDate(src, DateTimeFormatter.ofPattern(pattern));
+    }
+
+    /**
+     * 字符串转LocalDateTime
+     *
+     * @param src
+     * @param pattern
+     * @return
+     * @deprecated use {@link Date8Utils#parseDateTime(String, String)}
+     */
+    @Deprecated
     public static LocalDateTime parseDate(String src, String pattern) {
         return parseDate(src, DateTimeFormatter.ofPattern(pattern));
     }
 
+    /**
+     * 字符串转LocalDateTime
+     *
+     * @param src
+     * @param formatter
+     * @return
+     * @deprecated use {@link #parseDateTime(String, DateTimeFormatter)}
+     */
+    @Deprecated
     public static LocalDateTime parseDate(String src, DateTimeFormatter formatter) {
         return LocalDateTime.parse(src, formatter);
     }
