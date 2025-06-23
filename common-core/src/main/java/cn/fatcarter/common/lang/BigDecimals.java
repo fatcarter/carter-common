@@ -72,6 +72,12 @@ public final class BigDecimals {
         return new BigDecimal(v1).divide(new BigDecimal(v2), scale, roundingMode);
     }
 
+    public static BigDecimal diff(BigDecimal v1, BigDecimal v2) {
+        return v1.subtract(v2);
+    }
+    public static  BigDecimal diffAbs(BigDecimal v1, BigDecimal v2) {
+        return diff(v1, v2).abs();
+    }
 
     public static boolean isGreater(BigDecimal v1, BigDecimal v2) {
         return v1.compareTo(v2) > 0;
