@@ -132,6 +132,12 @@ public class Date8Utils {
         return Duration.of(diff, ChronoUnit.MILLIS);
     }
 
+    public static Duration diff(LocalDate d1, LocalDate d2) {
+        return diff(d1.atStartOfDay(), d2.atStartOfDay());
+    }
+
+
+
     public static String format(LocalDateTime dateTime, DateTimeFormatter formatter) {
         return formatter.format(dateTime);
     }

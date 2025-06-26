@@ -75,9 +75,34 @@ public final class BigDecimals {
     public static BigDecimal diff(BigDecimal v1, BigDecimal v2) {
         return v1.subtract(v2);
     }
+
+    public static BigDecimal diff(String v1, String v2) {
+        return diff(new BigDecimal(v1), new BigDecimal(v2));
+    }
+
+    public static BigDecimal diff(Integer v1, Integer v2) {
+        return diff(v1.toString(), v2.toString());
+    }
+
+    public static BigDecimal diff(Long v1, Long v2) {
+        return diff(v1.toString(), v2.toString());
+    }
     public static  BigDecimal diffAbs(BigDecimal v1, BigDecimal v2) {
         return diff(v1, v2).abs();
     }
+
+    public static BigDecimal diffAbs(String v1, String v2) {
+        return diffAbs(new BigDecimal(v1), new BigDecimal(v2));
+    }
+
+    public static BigDecimal diffAbs(Integer v1, Integer v2) {
+        return diffAbs(v1.toString(), v2.toString());
+    }
+
+    public static BigDecimal diffAbs(Long v1, Long v2) {
+        return diffAbs(v1.toString(), v2.toString());
+    }
+
 
     public static boolean isGreater(BigDecimal v1, BigDecimal v2) {
         return v1.compareTo(v2) > 0;
