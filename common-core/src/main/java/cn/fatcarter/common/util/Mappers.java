@@ -11,6 +11,10 @@ import java.util.function.Predicate;
 
 public class Mappers {
 
+    public static <T, M, R> Function<T, R> andThen(Function<T, M> mapper, Function<M, R> next) {
+        return mapper.andThen(next);
+    }
+
     public static <T> Function<List<T>, Optional<T>> firstMapper() {
         return list -> list.isEmpty() ? Optional.empty() : Optional.of(list.get(0));
     }
