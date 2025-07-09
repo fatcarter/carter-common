@@ -81,6 +81,7 @@ public final class StringUtils {
     }
 
     public static String repeat(String src, String delimiter, int count) {
+        if(count == 0) return "";
         String[] sources = new String[count];
         Arrays.fill(sources, src);
         return String.join(delimiter, sources);

@@ -1,15 +1,18 @@
 package cn.fatcarter.common;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
+import java.io.Serializable;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-public class TreeNode<T, ID> {
-    private ID nodeId;
-    private ID parentNodeId;
-    private T node;
-    private List<TreeNode<T, ID>> children;
+public interface TreeNode<T extends TreeNode<T, ID>, ID extends Serializable> {
+    ID getId();
+
+    ID getParentId();
+
+    T getParent();
+
+    void setParent(T parent);
+
+    void setChildren(List<T> children);
+
+    List<T> getChildren();
 }

@@ -113,7 +113,7 @@ public final class BigDecimals {
     }
 
     public static boolean isSame(BigDecimal v1, BigDecimal v2) {
-        return v1.equals(v2);
+        return v1.compareTo(v2) == 0;
     }
 
     public static boolean isPositive(BigDecimal v) {

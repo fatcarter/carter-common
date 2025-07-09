@@ -21,6 +21,7 @@ import java.util.stream.Stream;
 
 public class Date8Utils {
     public static DateTimeFormatter yyyyMMdd = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static DateTimeFormatter excelYyyyMMdd = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     public static DateTimeFormatter yyyyMMddHHmmss = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private static final Map<String, DateTimeFormatter> PATTERN_CACHE = new HashMap<>();
@@ -137,13 +138,12 @@ public class Date8Utils {
     }
 
 
-
     public static String format(LocalDateTime dateTime, DateTimeFormatter formatter) {
         return formatter.format(dateTime);
     }
 
     public static String format(LocalDateTime dateTime, String pattern) {
-        return format(dateTime, PATTERN_CACHE.computeIfAbsent(pattern,DateTimeFormatter::ofPattern));
+        return format(dateTime, PATTERN_CACHE.computeIfAbsent(pattern, DateTimeFormatter::ofPattern));
     }
 
 
