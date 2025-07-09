@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public final class BigDecimals {
+    public static final int DEFAULT_SCALE = 10;
     public static final BigDecimal ZERO = new BigDecimal("0");
     public static final BigDecimal ONE = new BigDecimal("1");
     public static final BigDecimal TEN = new BigDecimal("10");
@@ -39,33 +40,33 @@ public final class BigDecimals {
 
 
     public static BigDecimal divide(Integer v1, Integer v2, RoundingMode roundingMode) {
-        return new BigDecimal(v1).divide(new BigDecimal(v2), roundingMode);
+        return divide(v1.toString(), v2.toString(), roundingMode);
     }
 
     public static BigDecimal divide(Integer v1, Integer v2, int scale, RoundingMode roundingMode) {
-        return new BigDecimal(v1).divide(new BigDecimal(v2), scale, roundingMode);
+        return divide(v1.toString(), v2.toString(), scale, roundingMode);
     }
 
 
     public static BigDecimal divide(Long v1, Long v2, RoundingMode roundingMode) {
-        return new BigDecimal(v1).divide(new BigDecimal(v2), roundingMode);
+        return divide(v1.toString(), v2.toString(), roundingMode);
     }
 
     public static BigDecimal divide(Long v1, Long v2, int scale, RoundingMode roundingMode) {
-        return new BigDecimal(v1).divide(new BigDecimal(v2), scale, roundingMode);
+        return divide(v1.toString(), v2.toString(), scale, roundingMode);
     }
 
 
     public static BigDecimal divide(Double v1, Double v2, RoundingMode roundingMode) {
-        return new BigDecimal(v1).divide(new BigDecimal(v2), roundingMode);
+        return divide(v1.toString(), v2.toString(), roundingMode);
     }
 
     public static BigDecimal divide(Double v1, Double v2, int scale, RoundingMode roundingMode) {
-        return new BigDecimal(v1).divide(new BigDecimal(v2), scale, roundingMode);
+        return divide(v1.toString(), v2.toString(), scale, roundingMode);
     }
 
     public static BigDecimal divide(String v1, String v2, RoundingMode roundingMode) {
-        return new BigDecimal(v1).divide(new BigDecimal(v2), roundingMode);
+        return divide(v1, v2, DEFAULT_SCALE, roundingMode);
     }
 
     public static BigDecimal divide(String v1, String v2, int scale, RoundingMode roundingMode) {

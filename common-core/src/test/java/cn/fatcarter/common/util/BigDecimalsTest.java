@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class BigDecimalsTest {
 
@@ -21,6 +22,11 @@ public class BigDecimalsTest {
         Assert.assertTrue(BigDecimals.isPositive(small));
         Assert.assertTrue(BigDecimals.isNegative(negative));
         Assert.assertTrue(BigDecimals.isZero(zero));
+    }
+
+    @Test
+    public void test2(){
+        System.out.println(new BigDecimal("10.0").divide(new BigDecimal("3"),100,RoundingMode.HALF_UP));
 
     }
 }
