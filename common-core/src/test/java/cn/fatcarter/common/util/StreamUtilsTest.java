@@ -1,22 +1,35 @@
 package cn.fatcarter.common.util;
 
-import org.junit.Test;
+import lombok.Data;
 
 import java.util.List;
 
 public class StreamUtilsTest {
-    @Test
-    public void testMaps(){
-        List<Integer> intList = List.of(1, 2, 3, 4, 5);
+    private List<GroupDto> dtos = List.of(
+        GroupDto.of(11864, 4622),
+        GroupDto.of(11864, 1234),
+        GroupDto.of(11864, 6547),
+        GroupDto.of(11864, 4567),
+        GroupDto.of(11864, 6546),
 
-        // Example: Integer -> String -> Long -> Double
-//        List<Double> result = StreamUtils.maps(
-//                intList,
-//                i -> String.valueOf(i),  // Integer -> String
-//                s -> Long.parseLong(s),  // String -> Long
-//                l -> l.doubleValue()     // Long -> Double
-//        );
+        GroupDto.of(22680, 4622),
+        GroupDto.of(22680, 8979),
+        GroupDto.of(22680, 7897),
+        GroupDto.of(22680, 5231),
+        GroupDto.of(22680, 1457)
+    );
 
-//        System.out.println(result);  // Output: [1.0, 2.0, 3.0, 4.0, 5.0]
+    @Data
+    public static class GroupDto {
+        private Integer companyId;
+        private Integer projectId;
+
+        public static GroupDto of(Integer companyId, Integer projectId) {
+            GroupDto groupDto = new GroupDto();
+            groupDto.companyId = companyId;
+            groupDto.projectId = projectId;
+            return groupDto;
+        }
     }
+
 }

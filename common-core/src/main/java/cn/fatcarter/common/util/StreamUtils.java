@@ -15,6 +15,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -86,8 +87,20 @@ public class StreamUtils {
         return mapToStream(list, mapper).collect(Collectors.toSet());
     }
 
+    public static <E, K, V> Map<K, V> grouping(Collection<E> list, Function<E, K> keyMapper, Collector<? super E, ?, V> downstream) {
+        return list.stream().collect(Collectors.groupingBy(keyMapper, downstream));
+    }
+
+    public static <E, K, V> Map<K, V> grouping(Collection<E> list, Function<E, K> keyMapper, Function<E, V> valueMapper, Collector<? super V, ?, V> downstream) {
+        return grouping(list, keyMapper, Collectors.mapping(valueMapper, downstream));
+    }
+
+    public static <E, K, V> Map<K, List<V>> grouping(Collection<E> list, Function<E, K> keyMapper, Function<E, V> valueMapper) {
+        return grouping(list, keyMapper, Collectors.mapping(valueMapper, Collectors.toList()));
+    }
+
     public static <E, K> Map<K, List<E>> grouping(Collection<E> list, Function<E, K> keyMapper) {
-        return list.stream().collect(Collectors.groupingBy(keyMapper));
+        return grouping(list, keyMapper, Function.identity());
     }
 
     public static <E> List<E> filter(Collection<E> list, Predicate<E> filter) {
