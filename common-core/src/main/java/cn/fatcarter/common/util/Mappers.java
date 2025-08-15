@@ -10,6 +10,10 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class Mappers {
+    public static <T, R> Function<T, R> map(Function<T, R> map) {
+
+    }
+
 
     public static <T, M, R> Function<T, R> andThen(Function<T, M> mapper, Function<M, R> next) {
         return mapper.andThen(next);

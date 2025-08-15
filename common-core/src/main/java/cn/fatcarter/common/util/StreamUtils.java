@@ -134,6 +134,14 @@ public class StreamUtils {
         return list.stream().filter(filter).findFirst();
     }
 
+    public static <T> Optional<T> findFirst(T[] list, Predicate<T> filter) {
+        if (list == null || list.length == 0) {
+            return Optional.empty();
+        }
+        return Arrays.stream(list).filter(filter).findFirst();
+    }
+
+
     public static <T> List<T> distinct(Collection<T> list) {
         return distinct(list, Function.identity());
     }
