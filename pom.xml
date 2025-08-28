@@ -18,6 +18,7 @@
         <module>common-serialize</module>
         <module>common-rpc</module>
         <module>common-reactive</module>
+        <module>multi-kafka</module>
     </modules>
 
     <properties>

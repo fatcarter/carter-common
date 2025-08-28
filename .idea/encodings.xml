@@ -19,6 +19,14 @@
     <file url="file://$PROJECT_DIR$/common-serialize/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common-validation/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common-validation/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/multi-kafka/multi-kafka-autoconfigure/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/multi-kafka/multi-kafka-autoconfigure/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/multi-kafka/multi-kafka-boot-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/multi-kafka/multi-kafka-boot-starter/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/multi-kafka/multi-kafka-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/multi-kafka/multi-kafka-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/multi-kafka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/multi-kafka/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
