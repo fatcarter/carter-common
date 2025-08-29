@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@ConfigurationProperties(prefix = "spring.kafka.multi")
+@ConfigurationProperties(prefix = "spring.kafka")
 public class MultiKafkaProperties {
     @NestedConfigurationProperty
     private Map<String, KafkaProperties> clusters = new LinkedHashMap<>();
