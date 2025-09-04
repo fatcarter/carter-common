@@ -111,6 +111,18 @@ public class StreamUtils {
         return list.stream().filter(filter);
     }
 
+    public static <E, T> Set<T> mapFilterToSet(Collection<E> list,Function<E, T> mapper, Predicate<T> filter) {
+        return list.stream().map(mapper).filter(filter).collect(Collectors.toSet());
+    }
+
+    public static <E, T> Set<T> filterMapToSet(Collection<E> list, Predicate<E> filter, Function<E, T> mapper) {
+        return list.stream().filter(filter).map(mapper).collect(Collectors.toSet());
+    }
+
+    public static <E, T> List<T> mapFilterToList(Collection<E> list,Function<E, T> mapper, Predicate<T> filter) {
+        return list.stream().map(mapper).filter(filter).collect(Collectors.toList());
+    }
+
     public static <E, T> List<T> filterMapToList(Collection<E> list, Predicate<E> filter, Function<E, T> mapper) {
         return list.stream().filter(filter).map(mapper).collect(Collectors.toList());
     }
