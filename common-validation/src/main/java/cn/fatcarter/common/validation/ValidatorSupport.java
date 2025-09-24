@@ -13,6 +13,7 @@ public class ValidatorSupport {
                 boolean accept = accept(o, acceptValues);
                 if(!accept) return false;
             }
+            return true;
         }
         if (value instanceof Map<?,?> map) {
             for (Object o : map.keySet()) {
