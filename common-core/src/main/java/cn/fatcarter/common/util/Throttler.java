@@ -4,6 +4,7 @@ import cn.fatcarter.common.locks.DefaultLockRegistry;
 import cn.fatcarter.common.locks.LockRegistry;
 import cn.fatcarter.common.locks.WhileLockedProcessor;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
@@ -39,25 +40,39 @@ public abstract class Throttler {
         Throttler.executorService = executorService;
     }
 
+    public static void throttle2(String key, Runnable runnable, Duration timeout) {
+        start();
+        Throttle throttle = MAP.get(key);
+        if (throttle == null) {
+            offer(key, runnable, timeout);
+        } else {
+            throttle.setRunnable(runnable);
+        }
+    }
+
     public static void throttle(String key, Runnable runnable, Duration timeout) {
         start();
         Throttle throttle = MAP.get(key);
         if (throttle == null) {
-            WhileLockedProcessor processor = new WhileLockedProcessor(lockRegistry, key) {
-                @Override
-                protected void whileLocked() throws Exception {
-                    if (MAP.get(key) == null) {
-                        Throttle t = new Throttle(getRunner(key, runnable), timeout);
-                        MAP.put(key, t);
-                        queue.add(t);
-                    }
+            offer(key, runnable, timeout);
+        }
+    }
+
+    private static void offer(String key, Runnable runnable, Duration timeout) {
+        WhileLockedProcessor processor = new WhileLockedProcessor(lockRegistry, key) {
+            @Override
+            protected void whileLocked() throws Exception {
+                if (MAP.get(key) == null) {
+                    Throttle t = new Throttle(getRunner(key, runnable), timeout);
+                    MAP.put(key, t);
+                    queue.add(t);
                 }
-            };
-            try {
-                processor.doWhileLocked();
-            } catch (Exception e) {
-                throw new RuntimeException("创建节流(throttle)对象失败! e=" + e, e);
             }
+        };
+        try {
+            processor.doWhileLocked();
+        } catch (Exception e) {
+            throw new RuntimeException("创建节流(throttle)对象失败! e=" + e, e);
         }
     }
 
@@ -119,6 +134,7 @@ public abstract class Throttler {
 
     @Getter
     private static class Throttle implements Delayed {
+        @Setter
         private Runnable runnable;
         private final long delayedTime;
 
