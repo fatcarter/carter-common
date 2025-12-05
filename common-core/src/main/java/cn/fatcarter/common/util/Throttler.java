@@ -46,7 +46,7 @@ public abstract class Throttler {
         if (throttle == null) {
             offer(key, runnable, timeout);
         } else {
-            throttle.setRunnable(runnable);
+            throttle.setRunner(getRunner(key, runnable));
         }
     }
 
@@ -77,7 +77,7 @@ public abstract class Throttler {
     }
 
 
-    private static Runnable getRunner(String key, Runnable runnable) {
+    private static Runner getRunner(String key, Runnable runnable) {
         return () -> {
             try {
                 runnable.run();
@@ -114,8 +114,8 @@ public abstract class Throttler {
     private static void runThrottle(Throttle throttle) {
         if (throttle == null) return;
 
-        Runnable runner = () -> {
-            Runnable runnable = throttle.getRunnable();
+        Runner runner = () -> {
+            Runner runnable = throttle.getRunner();
             try {
                 runnable.run();
             } catch (Throwable throwable) {
@@ -131,15 +131,17 @@ public abstract class Throttler {
 
     }
 
+    private interface Runner extends Runnable {
+    }
 
     @Getter
     private static class Throttle implements Delayed {
         @Setter
-        private Runnable runnable;
+        private Runner runner;
         private final long delayedTime;
 
-        public Throttle(Runnable runnable, Duration timeout) {
-            this.runnable = runnable;
+        public Throttle(Runner runner, Duration timeout) {
+            this.runner = runner;
             this.delayedTime = System.currentTimeMillis() + timeout.toMillis();
         }
 
