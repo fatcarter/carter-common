@@ -24,7 +24,7 @@ import org.springframework.kafka.support.converter.RecordMessageConverter;
 import java.util.Map;
 
 @Configuration
-@EnableConfigurationProperties(MultiKafkaProperties.class)
+@EnableConfigurationProperties({MultiKafkaProperties.class})
 public class MultiKafkaAutoConfiguration {
 
 
@@ -132,6 +132,8 @@ public class MultiKafkaAutoConfiguration {
                 // 也可顺便加个别名（非必需）
                 context.registerAlias(name, name + "ListenerContainerFactory");
                 log.info("Kafka Cluster [{}] registered! ContainerFactory bean {} with alias {}", name, name, lcfAlias);
+
+                context.registerBean(name + "Kafka", Kafka.class, () -> new Kafka<>(context, name));
             }
             return bean;
         }
